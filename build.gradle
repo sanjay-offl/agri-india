@@ -15,6 +15,12 @@ buildscript {
         classpath 'com.google.gms:google-services:4.3.4'
         // in the individual module build.gradle files
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.1.0-alpha05"
+
+        // kotlin-kapt locates tools.jar by looking for com.sun.tools.javac.util.Context
+        // on the buildscript classpath. On JDK 8 that class lives in tools.jar, which
+        // is not added automatically when Gradle runs from a JDK whose java.home points
+        // at the jre/ subdirectory. The path does not exist on JDK 9+, so this is a no-op there.
+        classpath files("${System.getProperty('java.home')}/../lib/tools.jar")
     }
 }
 
