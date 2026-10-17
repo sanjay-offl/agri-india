@@ -103,10 +103,6 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
-    implementation 'com.littlemango:stacklayoutmanager:1.0.5'
-
-    implementation 'com.azoft.carousellayoutmanager:carousel:1.4.4'
-
     implementation "com.jakewharton:butterknife:10.1.0"
     annotationProcessor "com.jakewharton:butterknife-compiler:10.1.0"
 
@@ -121,4 +117,14 @@ dependencies {
     implementation 'com.razorpay:checkout:1.5.16'
 
 
+}
+
+configurations.all {
+    resolutionStrategy {
+        // PosterSlider transitively depends on ExoPlayer 2.7.0, which was only ever
+        // published to jcenter (now shut down). ExoPlayer 2.15.1 is the newest release
+        // available on Google's Maven repository that does not pull in
+        // androidx.core 1.7.0 (which would require raising compileSdk to 31).
+        force 'com.google.android.exoplayer:exoplayer:2.15.1'
+    }
 }
